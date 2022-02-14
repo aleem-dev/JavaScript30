@@ -57,7 +57,64 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
+  <!-- <p>Press inside this IFrame first to focus it, then try pressing keys on the keyboard.</p>
+  <p id="log"></p>
+  <audio data-key="65" id="demo65" src="sounds/clap.wav"></audio> -->
+
 <script>
+// listen for keypress event on keyboard ?? - done
+// match a specific key pressed - done
+// play corosponding key audio - done
+// reset audio - done
+// apply style change - done
+// remove style change
+
+
+function playAudio (e) { //listen to the keypress event
+const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`); //get key
+if(!audio) return; //if the audio returns null the function exists
+audio.currentTime=0; //reset the time
+audio.play(); //play corrosponing key
+const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);  //apply style change
+key.classList.add('playing');  //apply style chnges
+}
+
+function removeTransition(e){
+if(e.propertyName !== 'transform')return; //to return when there is no transform
+console.log(e.propertyName);
+this.classList.remove('playing');
+}
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+window.addEventListener('keydown', playAudio);
+
+
+// function myFunction(){
+//   const demo = document.querySelector('#demo');
+// console.log(demo);
+//const demo65 = document.querySelector('#demo65');
+// console.log(demo65);
+// demo65.play();
+// document.getElementById('demo65').play();
+// }
+// const log = document.getElementById('log');
+// const demo65 = document.querySelector('#demo65');
+// document.addEventListener('keypress', logKey);
+
+// function logKey(e) {
+//   if(e.keyCode==65){
+//     log.textContent += ` ${e.code}`;
+//   console.log(e);
+//   demo65.currentTime = 0;
+//   demo65.play();  
+//   log.setAttribute('style','border:red solid 1px; background:blue; color:white;');
+//   }
+//   console.log(e.code + ' : ' + e.keyCode);
+//   document.onkeyup = () => {log.removeAttribute('style');};
+//   //log.removeAttribute('style');
+// }
+
 
 </script>
 
